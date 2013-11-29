@@ -1,0 +1,16 @@
+{
+    "app.exception": [
+        {
+            "interface": "pallo\\web\\security\\ApplicationListener",
+            "method": "handleException",
+            "weight": 25
+        }
+    ],
+    "app.dispatch.pre": [
+        {
+            "interface": "pallo\\web\\security\\ApplicationListener",
+            "method": "protectSecuredPaths",
+            "weight": 90
+        }
+    ]
+}
