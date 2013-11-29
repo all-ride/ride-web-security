@@ -1,0 +1,220 @@
+{
+    "dependencies": [
+        {
+            "interfaces": "pallo\\application\\cache\\control\\CacheControl",
+            "class": "pallo\\application\\cache\\control\\SecurityCacheControl",
+            "id": "security",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "securityModel",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\security\\model\\SecurityModel",
+                                "id": "%system.security.model.default|chain%"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\security\\matcher\\PathMatcher",
+            "class": "pallo\\library\\security\\matcher\\GenericPathMatcher"
+        },
+        {
+            "interfaces": "pallo\\library\\encryption\\hash\\Hash",
+            "class": "pallo\\library\\encryption\\hash\\GenericHash",
+            "id": "security",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "algorithm",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "security.hash",
+                                "default": "sha1"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\security\\authenticator\\io\\AuthenticatorIO",
+            "class": "pallo\\web\\security\\authenticator\\io\\SessionAuthenticatorIO",
+            "id": "security",
+            "calls": [
+                {
+                    "method": "setRequest",
+                    "arguments": [
+                        {
+                            "name": "request",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\http\\Request"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\security\\authenticator\\Authenticator", 
+            "class": "pallo\\library\\security\\authenticator\\GenericAuthenticator",
+            "id": "generic",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "salt",
+                            "type": "call",
+                            "properties": {
+                                "interface": "pallo\\application\\system\\System",
+                                "method": "getSecretKey"
+                            }
+                        },
+                        {
+                            "name": "timeout",
+                            "type": "call",
+                            "properties": {
+                                "interface": "pallo\\library\\http\\session\\io\\SessionIO",
+                                "method": "getTimeout"
+                            }
+                        },
+                        {
+                            "name": "isUnique",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "security.unique"
+                            }
+                        }
+                    ]
+                }                        
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\security\\authenticator\\Authenticator",
+            "class": "pallo\\library\\security\\authenticator\\ChainedAuthenticator",
+            "id": "chain",
+            "calls": [
+                {
+                    "method": "addAuthenticator",
+                    "arguments": [
+                        {
+                            "name": "authenticator",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\security\\authenticator\\Authenticator",
+                                "id": "generic"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "class": "pallo\\library\\system\\file\\File",
+            "id": "cache.security",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "path",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "system.cache.security"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },        
+        {
+            "interfaces": "pallo\\library\\security\\model\\SecurityModel",
+            "class": "pallo\\library\\security\\model\\ChainedSecurityModel",
+            "id": "chain"
+        },
+        {
+            "interfaces": "pallo\\library\\security\\model\\SecurityModel",
+            "class": "pallo\\web\\security\\model\\CachedSecurityModel",
+            "id": "cache",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "model",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\security\\model\\SecurityModel",
+                                "id": "%system.security.model.cache|chain%"
+                            }
+                        },
+                        {
+                            "name": "file",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\system\\file\\File",
+                                "id": "cache.security"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "class": "pallo\\library\\security\\SecurityManager",
+            "id": "security",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "authenticator",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\security\\authenticator\\Authenticator",
+                                "id": "chain"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "setHashAlgorithm",
+                    "arguments": [
+                        {
+                            "name": "hashAlgorithm",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\encryption\\hash\\Hash",
+                                "id": "security"
+                            }
+                        }
+                    ]
+                },
+                "setLog",
+                "setPathMatcher",
+                {
+                    "method": "setSecurityModel",
+                    "arguments": [
+                        {
+                            "name": "model",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\security\\model\\SecurityModel",
+                                "id": "%system.security.model.default|chain%"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
