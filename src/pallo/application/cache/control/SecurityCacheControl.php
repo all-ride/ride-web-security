@@ -54,12 +54,10 @@ class SecurityCacheControl extends AbstractCacheControl {
      * @return null
      */
     public function enable() {
-        $model = $this->config->get('system.security.model.cache');
-        if ($model) {
+        $model = $this->config->get('system.security.model.default');
+        if ($model == 'cache') {
             return;
         }
-
-        $model = $this->config->get('system.security.model.default');
 
         $this->config->set('system.security.model.cache', $model);
         $this->config->set('system.security.model.default', 'cache');
@@ -70,6 +68,11 @@ class SecurityCacheControl extends AbstractCacheControl {
      * @return null
      */
     public function disable() {
+        $model = $this->config->get('system.security.model.default');
+        if ($model != 'cache') {
+            return;
+        }
+
         $model = $this->config->get('system.security.model.cache');
 
         $this->config->set('system.security.model.default', $model);
