@@ -170,7 +170,8 @@
             ]
         },
         {
-            "class": "pallo\\library\\security\\SecurityManager",
+            "interfaces": "pallo\\library\\security\\SecurityManager",
+            "class": "pallo\\web\\security\\SecurityManager",
             "id": "security",
             "calls": [
                 {
@@ -201,6 +202,7 @@
                 },
                 "setLog",
                 "setPathMatcher",
+                "setRequest",
                 {
                     "method": "setSecurityModel",
                     "arguments": [
