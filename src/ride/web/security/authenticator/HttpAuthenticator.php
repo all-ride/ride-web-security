@@ -1,16 +1,16 @@
 <?php
 
-namespace pallo\security\authenticator;
+namespace ride\security\authenticator;
 
-use pallo\library\event\EventManager;
-use pallo\library\event\Event;
-use pallo\library\http\Request;
-use pallo\library\security\authenticator\io\AuthenticatorIO;
-use pallo\library\security\authenticator\AbstractAuthenticator;
-use pallo\library\security\authenticator\Authenticator;
-use pallo\library\security\exception\SecurityException;
-use pallo\library\security\model\User;
-use pallo\library\security\SecurityManager;
+use ride\library\event\EventManager;
+use ride\library\event\Event;
+use ride\library\http\Request;
+use ride\library\security\authenticator\io\AuthenticatorIO;
+use ride\library\security\authenticator\AbstractAuthenticator;
+use ride\library\security\authenticator\Authenticator;
+use ride\library\security\exception\SecurityException;
+use ride\library\security\model\User;
+use ride\library\security\SecurityManager;
 
 /**
  * Simple HTTP digest authenticator to wrap around another authenticator
@@ -71,8 +71,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Constructs a new authenticator
-     * @param pallo\core\Zibo $pallo Instance of Zibo
-     * @param pallo\library\security\authenticator\io\AuthenticatorIO $io
+     * @param ride\core\Zibo $ride Instance of Zibo
+     * @param ride\library\security\authenticator\io\AuthenticatorIO $io
      * @param string $realm The realm for the authentication
      * @return null
      */
@@ -105,7 +105,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Hook with the security model used to store A1 of the
-     * @param pallo\library\event\Event $event
+     * @param ride\library\event\Event $event
      * @return null
      */
     public function updateDigest(Event $event) {
@@ -130,7 +130,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Gets the current user.
-     * @return pallo\library\security\model\User User instance if a user is
+     * @return ride\library\security\model\User User instance if a user is
      * logged in, null otherwise
      */
     public function getUser() {
@@ -143,8 +143,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Authenticates a user through the incoming request
-     * @param pallo\library\http\Request $request
-     * @return pallo\library\security\model\User|null User if the authentication
+     * @param ride\library\http\Request $request
+     * @return ride\library\security\model\User|null User if the authentication
      * succeeded
      */
     public function authenticate(Request $request) {
@@ -157,8 +157,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Authenticates a user through the incoming request with the basic method
-     * @param pallo\library\http\Request $request
-     * @return pallo\library\security\model\User|null User if the authentication
+     * @param ride\library\http\Request $request
+     * @return ride\library\security\model\User|null User if the authentication
      * succeeded
      */
     protected function authenticateBasic($request) {
@@ -173,8 +173,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Authenticates a user through the incoming request with the digest method
-     * @param pallo\library\http\Request $request
-     * @return pallo\library\security\model\User|null User if the authentication
+     * @param ride\library\http\Request $request
+     * @return ride\library\security\model\User|null User if the authentication
      * succeeded
      */
     protected function authenticateDigest(Request $request) {
@@ -207,9 +207,9 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Sets the current authenticated user
-     * @param pallo\library\security\model\User $user User to set the
+     * @param ride\library\security\model\User $user User to set the
      * authentication for
-     * @return pallo\library\security\model\User updated user with the
+     * @return ride\library\security\model\User updated user with the
      * information of the authentification
      */
     public function setUser(User $user) {
@@ -218,7 +218,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Generates a valid response from the digest data
-     * @param pallo\library\security\model\User $user
+     * @param ride\library\security\model\User $user
      * @param array $digest The data of the digest
      * @param string $method HTTP method
      * @return string Valid response to compare the digest response with

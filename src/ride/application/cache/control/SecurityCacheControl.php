@@ -1,11 +1,11 @@
 <?php
 
-namespace pallo\application\cache\control;
+namespace ride\application\cache\control;
 
-use pallo\library\config\Config;
-use pallo\library\security\model\SecurityModel;
+use ride\library\config\Config;
+use ride\library\security\model\SecurityModel;
 
-use pallo\web\security\model\CachedSecurityModel;
+use ride\web\security\model\CachedSecurityModel;
 
 /**
  * Cache control implementation for the security model
@@ -20,20 +20,20 @@ class SecurityCacheControl extends AbstractCacheControl {
 
     /**
      * Instance of the security model
-     * @var pallo\library\security\model\SecurityModel
+     * @var ride\library\security\model\SecurityModel
      */
     private $securityModel;
 
     /**
      * Instance of the configuration
-     * @var pallo\library\config\Config
+     * @var ride\library\config\Config
      */
     private $config;
 
     /**
      * Constructs a new security cache control
-     * @param pallo\library\security\model\SecurityModel $securityModel
-     * @param pallo\library\config\Config $config
+     * @param ride\library\security\model\SecurityModel $securityModel
+     * @param ride\library\config\Config $config
      * @return null
      */
     public function __construct(SecurityModel $securityModel, Config $config) {

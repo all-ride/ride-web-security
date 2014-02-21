@@ -1,15 +1,15 @@
 <?php
 
-namespace pallo\web\security;
+namespace ride\web\security;
 
-use pallo\library\event\Event;
-use pallo\library\http\Header;
-use pallo\library\http\Response;
-use pallo\library\security\authenticator\ChainedAuthenticator;
-use pallo\library\security\exception\UnauthorizedException;
-use pallo\library\security\SecurityManager;
+use ride\library\event\Event;
+use ride\library\http\Header;
+use ride\library\http\Response;
+use ride\library\security\authenticator\ChainedAuthenticator;
+use ride\library\security\exception\UnauthorizedException;
+use ride\library\security\SecurityManager;
 
-use pallo\web\security\authenticator\HttpAuthenticator;
+use ride\web\security\authenticator\HttpAuthenticator;
 
 /**
  * Application listener to integrate security
@@ -18,10 +18,10 @@ class ApplicationListener {
 
     /**
      * Checks if the current route is allowed.
-     * @param pallo\library\event\Event $event
-     * @param pallo\library\security\SecurityManager $securityManager
+     * @param ride\library\event\Event $event
+     * @param ride\library\security\SecurityManager $securityManager
      * @return null
-     * @throws pallo\library\security\exception\UnauthorizedException when the
+     * @throws ride\library\security\exception\UnauthorizedException when the
      * route is not allowed
      */
     public function protectSecuredPaths(Event $event, SecurityManager $securityManager) {
@@ -44,8 +44,8 @@ class ApplicationListener {
 
     /**
      * Act on a uncaught exception
-     * @param pallo\library\event\Event $event
-     * @param pallo\library\security\SecurityManager $securityManager
+     * @param ride\library\event\Event $event
+     * @param ride\library\security\SecurityManager $securityManager
      * @return null
      */
     public function handleException(Event $event, SecurityManager $securityManager) {
@@ -71,7 +71,7 @@ class ApplicationListener {
 
     /**
      * Checks if a HTTP authenticator is active
-     * @param pallo\library\security\authenticator\Authenticator $authenticator
+     * @param ride\library\security\authenticator\Authenticator $authenticator
      * @return boolean
      */
     protected function getHttpAuthenticator($authenticator) {
