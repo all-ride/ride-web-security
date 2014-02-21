@@ -1,8 +1,8 @@
 {
     "dependencies": [
         {
-            "interfaces": "pallo\\application\\cache\\control\\CacheControl",
-            "class": "pallo\\application\\cache\\control\\SecurityCacheControl",
+            "interfaces": "ride\\application\\cache\\control\\CacheControl",
+            "class": "ride\\application\\cache\\control\\SecurityCacheControl",
             "id": "security",
             "calls": [
                 {
@@ -12,7 +12,7 @@
                             "name": "securityModel",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\security\\model\\SecurityModel",
+                                "interface": "ride\\library\\security\\model\\SecurityModel",
                                 "id": "%system.security.model.default|chain%"
                             }
                         }
@@ -21,12 +21,12 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\security\\matcher\\PathMatcher",
-            "class": "pallo\\library\\security\\matcher\\GenericPathMatcher"
+            "interfaces": "ride\\library\\security\\matcher\\PathMatcher",
+            "class": "ride\\library\\security\\matcher\\GenericPathMatcher"
         },
         {
-            "interfaces": "pallo\\library\\encryption\\hash\\Hash",
-            "class": "pallo\\library\\encryption\\hash\\GenericHash",
+            "interfaces": "ride\\library\\encryption\\hash\\Hash",
+            "class": "ride\\library\\encryption\\hash\\GenericHash",
             "id": "security",
             "calls": [
                 {
@@ -45,8 +45,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\security\\authenticator\\io\\AuthenticatorIO",
-            "class": "pallo\\web\\security\\authenticator\\io\\SessionAuthenticatorIO",
+            "interfaces": "ride\\library\\security\\authenticator\\io\\AuthenticatorIO",
+            "class": "ride\\web\\security\\authenticator\\io\\SessionAuthenticatorIO",
             "id": "security",
             "calls": [
                 {
@@ -56,7 +56,7 @@
                             "name": "request",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\http\\Request"
+                                "interface": "ride\\library\\http\\Request"
                             }
                         }
                     ]
@@ -64,8 +64,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\security\\authenticator\\Authenticator", 
-            "class": "pallo\\library\\security\\authenticator\\GenericAuthenticator",
+            "interfaces": "ride\\library\\security\\authenticator\\Authenticator", 
+            "class": "ride\\library\\security\\authenticator\\GenericAuthenticator",
             "id": "generic",
             "calls": [
                 {
@@ -75,7 +75,7 @@
                             "name": "salt",
                             "type": "call",
                             "properties": {
-                                "interface": "pallo\\application\\system\\System",
+                                "interface": "ride\\application\\system\\System",
                                 "method": "getSecretKey"
                             }
                         },
@@ -83,7 +83,7 @@
                             "name": "timeout",
                             "type": "call",
                             "properties": {
-                                "interface": "pallo\\library\\http\\session\\io\\SessionIO",
+                                "interface": "ride\\library\\http\\session\\io\\SessionIO",
                                 "method": "getTimeout"
                             }
                         },
@@ -99,8 +99,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\security\\authenticator\\Authenticator",
-            "class": "pallo\\library\\security\\authenticator\\ChainedAuthenticator",
+            "interfaces": "ride\\library\\security\\authenticator\\Authenticator",
+            "class": "ride\\library\\security\\authenticator\\ChainedAuthenticator",
             "id": "chain",
             "calls": [
                 {
@@ -110,7 +110,7 @@
                             "name": "authenticator",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\security\\authenticator\\Authenticator",
+                                "interface": "ride\\library\\security\\authenticator\\Authenticator",
                                 "id": "generic"
                             }
                         }
@@ -119,7 +119,7 @@
             ]
         },
         {
-            "class": "pallo\\library\\system\\file\\File",
+            "class": "ride\\library\\system\\file\\File",
             "id": "cache.security",
             "calls": [
                 {
@@ -137,13 +137,13 @@
             ]
         },        
         {
-            "interfaces": "pallo\\library\\security\\model\\SecurityModel",
-            "class": "pallo\\library\\security\\model\\ChainedSecurityModel",
+            "interfaces": "ride\\library\\security\\model\\SecurityModel",
+            "class": "ride\\library\\security\\model\\ChainedSecurityModel",
             "id": "chain"
         },
         {
-            "interfaces": "pallo\\library\\security\\model\\SecurityModel",
-            "class": "pallo\\web\\security\\model\\CachedSecurityModel",
+            "interfaces": "ride\\library\\security\\model\\SecurityModel",
+            "class": "ride\\web\\security\\model\\CachedSecurityModel",
             "id": "cache",
             "calls": [
                 {
@@ -153,7 +153,7 @@
                             "name": "model",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\security\\model\\SecurityModel",
+                                "interface": "ride\\library\\security\\model\\SecurityModel",
                                 "id": "%system.security.model.cache|chain%"
                             }
                         },
@@ -161,7 +161,7 @@
                             "name": "file",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\system\\file\\File",
+                                "interface": "ride\\library\\system\\file\\File",
                                 "id": "cache.security"
                             }
                         }
@@ -170,8 +170,8 @@
             ]
         },
         {
-            "interfaces": "pallo\\library\\security\\SecurityManager",
-            "class": "pallo\\web\\security\\SecurityManager",
+            "interfaces": "ride\\library\\security\\SecurityManager",
+            "class": "ride\\web\\security\\SecurityManager",
             "id": "security",
             "calls": [
                 {
@@ -181,7 +181,7 @@
                             "name": "authenticator",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\security\\authenticator\\Authenticator",
+                                "interface": "ride\\library\\security\\authenticator\\Authenticator",
                                 "id": "chain"
                             }
                         }
@@ -194,7 +194,7 @@
                             "name": "hashAlgorithm",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\encryption\\hash\\Hash",
+                                "interface": "ride\\library\\encryption\\hash\\Hash",
                                 "id": "security"
                             }
                         }
@@ -210,7 +210,7 @@
                             "name": "model",
                             "type": "dependency",
                             "properties": {
-                                "interface": "pallo\\library\\security\\model\\SecurityModel",
+                                "interface": "ride\\library\\security\\model\\SecurityModel",
                                 "id": "%system.security.model.default|chain%"
                             }
                         }

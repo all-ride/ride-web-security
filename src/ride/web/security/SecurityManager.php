@@ -1,9 +1,9 @@
 <?php
 
-namespace pallo\web\security;
+namespace ride\web\security;
 
-use pallo\library\http\Request;
-use pallo\library\security\SecurityManager as LibSecurityManager;
+use ride\library\http\Request;
+use ride\library\security\SecurityManager as LibSecurityManager;
 
 class SecurityManager extends LibSecurityManager {
 

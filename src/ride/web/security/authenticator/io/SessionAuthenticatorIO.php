@@ -1,9 +1,9 @@
 <?php
 
-namespace pallo\web\security\authenticator\io;
+namespace ride\web\security\authenticator\io;
 
-use pallo\library\http\Request;
-use pallo\library\security\authenticator\io\AuthenticatorIO;
+use ride\library\http\Request;
+use ride\library\security\authenticator\io\AuthenticatorIO;
 
 /**
  * Session input/output implementation for the authenticator
@@ -12,13 +12,13 @@ class SessionAuthenticatorIO implements AuthenticatorIO {
 
     /**
      * Instance of the request
-     * @var pallo\library\http\Request
+     * @var ride\library\http\Request
      */
     protected $request;
 
     /**
      * Sets the request to this IO
-     * @param pallo\library\http\Request
+     * @param ride\library\http\Request
      * @return null
      */
     public function setRequest(Request $request = null) {
