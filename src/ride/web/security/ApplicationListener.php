@@ -31,8 +31,6 @@ class ApplicationListener {
             return;
         }
 
-        $securityManager->setRequest($request);
-
         $path = $request->getBasePath(true);
 
         if ($securityManager->isPathAllowed($path)) {

@@ -7,10 +7,6 @@ use ride\library\security\SecurityManager as LibSecurityManager;
 
 class SecurityManager extends LibSecurityManager {
 
-    public function setRequest(Request $request) {
-        $this->request = $request;
-    }
-
     /**
      * Checks whether the current user is allowed to view the provided URL
      * @param string $url URL to check
