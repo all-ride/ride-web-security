@@ -18,10 +18,10 @@ class ApplicationListener {
 
     /**
      * Checks if the current route is allowed.
-     * @param ride\library\event\Event $event
-     * @param ride\library\security\SecurityManager $securityManager
+     * @param \ride\library\event\Event $event
+     * @param \ride\library\security\SecurityManager $securityManager
      * @return null
-     * @throws ride\library\security\exception\UnauthorizedException when the
+     * @throws \ride\library\security\exception\UnauthorizedException when the
      * route is not allowed
      */
     public function protectSecuredPaths(Event $event, SecurityManager $securityManager) {
@@ -42,8 +42,8 @@ class ApplicationListener {
 
     /**
      * Act on a uncaught exception
-     * @param ride\library\event\Event $event
-     * @param ride\library\security\SecurityManager $securityManager
+     * @param \ride\library\event\Event $event
+     * @param \ride\library\security\SecurityManager $securityManager
      * @return null
      */
     public function handleException(Event $event, SecurityManager $securityManager) {
@@ -69,7 +69,7 @@ class ApplicationListener {
 
     /**
      * Checks if a HTTP authenticator is active
-     * @param ride\library\security\authenticator\Authenticator $authenticator
+     * @param \ride\library\security\authenticator\Authenticator $authenticator
      * @return boolean
      */
     protected function getHttpAuthenticator($authenticator) {

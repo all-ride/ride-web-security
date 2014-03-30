@@ -1,0 +1,2 @@
+security.password.update            Invoked before saving a user when the password has changed. This event passes the user instance and the plain text password as argument.
+security.authentication.login       Invoked after the user has been authenticated with username and password. This event passes the user instance as argument.

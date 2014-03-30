@@ -12,13 +12,13 @@ class SessionAuthenticatorIO implements AuthenticatorIO {
 
     /**
      * Instance of the request
-     * @var ride\library\http\Request
+     * @var \ride\library\http\Request
      */
     protected $request;
 
     /**
      * Sets the request to this IO
-     * @param ride\library\http\Request
+     * @param \ride\library\http\Request
      * @return null
      */
     public function setRequest(Request $request = null) {

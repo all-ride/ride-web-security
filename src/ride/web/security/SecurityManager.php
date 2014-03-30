@@ -2,7 +2,6 @@
 
 namespace ride\web\security;
 
-use ride\library\http\Request;
 use ride\library\security\SecurityManager as LibSecurityManager;
 
 class SecurityManager extends LibSecurityManager {
