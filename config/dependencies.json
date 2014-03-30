@@ -64,7 +64,7 @@
             ]
         },
         {
-            "interfaces": "ride\\library\\security\\authenticator\\Authenticator", 
+            "interfaces": "ride\\library\\security\\authenticator\\Authenticator",
             "class": "ride\\library\\security\\authenticator\\GenericAuthenticator",
             "id": "generic",
             "calls": [
@@ -95,7 +95,7 @@
                             }
                         }
                     ]
-                }                        
+                }
             ]
         },
         {
@@ -135,7 +135,7 @@
                     ]
                 }
             ]
-        },        
+        },
         {
             "interfaces": "ride\\library\\security\\model\\SecurityModel",
             "class": "ride\\library\\security\\model\\ChainedSecurityModel",
