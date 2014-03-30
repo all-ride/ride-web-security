@@ -2,7 +2,6 @@
 
 namespace ride\web\security\model;
 
-use ride\library\security\model\Permission;
 use ride\library\security\model\Role;
 use ride\library\security\model\SecurityModel;
 use ride\library\security\model\User;
@@ -40,7 +39,7 @@ class CachedSecurityModel implements SecurityModel {
     /**
      * Constructs a new cached security model
      * @param SecurityModel $model The model to cache
-     * @param ride\library\filesystem\File $file The file to cache to
+     * @param \ride\library\system\file\File $file The file to cache to
      * @return null
      */
     public function __construct(SecurityModel $model, File $file) {
@@ -71,7 +70,7 @@ class CachedSecurityModel implements SecurityModel {
 
     /**
      * Sets the file for the generated code
-     * @param ride\library\filesystem\File $file The file to generate the code in
+     * @param \ride\library\system\file\File $file The file to generate the code in
      * @return null
      */
     public function setFile(File $file) {
@@ -80,7 +79,7 @@ class CachedSecurityModel implements SecurityModel {
 
     /**
 	 * Gets the file for the generated code
-     * @return ride\library\filesystem\File The file to generate the code in
+     * @return \ride\library\system\file\File The file to generate the code in
      * @return null
      */
     public function getFile() {
@@ -202,7 +201,7 @@ class CachedSecurityModel implements SecurityModel {
 
     /**
      * Creates a new role
-     * @return ride\library\security\model\Role
+     * @return \ride\library\security\model\Role
      */
     public function createRole() {
         return $this->model->createRole();
@@ -257,7 +256,7 @@ class CachedSecurityModel implements SecurityModel {
 
     /**
      * Deletes the provided role
-     * @param ride\library\security\model\Role $role Role to delete
+     * @param \ride\library\security\model\Role $role Role to delete
      * @return null
      */
     public function deleteRole(Role $role) {

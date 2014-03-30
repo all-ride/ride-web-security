@@ -71,8 +71,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Constructs a new authenticator
-     * @param ride\core\Zibo $ride Instance of Zibo
-     * @param ride\library\security\authenticator\io\AuthenticatorIO $io
+     * @param \ride\library\security\authenticator\io\AuthenticatorIO $io
      * @param string $realm The realm for the authentication
      * @return null
      */
@@ -105,7 +104,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Hook with the security model used to store A1 of the
-     * @param ride\library\event\Event $event
+     * @param \ride\library\event\Event $event
      * @return null
      */
     public function updateDigest(Event $event) {
@@ -130,7 +129,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Gets the current user.
-     * @return ride\library\security\model\User User instance if a user is
+     * @return \ride\library\security\model\User User instance if a user is
      * logged in, null otherwise
      */
     public function getUser() {
@@ -143,8 +142,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Authenticates a user through the incoming request
-     * @param ride\library\http\Request $request
-     * @return ride\library\security\model\User|null User if the authentication
+     * @param \ride\library\http\Request $request
+     * @return \ride\library\security\model\User|null User if the authentication
      * succeeded
      */
     public function authenticate(Request $request) {
@@ -157,8 +156,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Authenticates a user through the incoming request with the basic method
-     * @param ride\library\http\Request $request
-     * @return ride\library\security\model\User|null User if the authentication
+     * @param \ride\library\http\Request $request
+     * @return \ride\library\security\model\User|null User if the authentication
      * succeeded
      */
     protected function authenticateBasic($request) {
@@ -173,8 +172,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Authenticates a user through the incoming request with the digest method
-     * @param ride\library\http\Request $request
-     * @return ride\library\security\model\User|null User if the authentication
+     * @param \ride\library\http\Request $request
+     * @return \ride\library\security\model\User|null User if the authentication
      * succeeded
      */
     protected function authenticateDigest(Request $request) {
@@ -207,9 +206,9 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Sets the current authenticated user
-     * @param ride\library\security\model\User $user User to set the
+     * @param \ride\library\security\model\User $user User to set the
      * authentication for
-     * @return ride\library\security\model\User updated user with the
+     * @return \ride\library\security\model\User updated user with the
      * information of the authentification
      */
     public function setUser(User $user) {
@@ -218,7 +217,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
 
     /**
      * Generates a valid response from the digest data
-     * @param ride\library\security\model\User $user
+     * @param \ride\library\security\model\User $user
      * @param array $digest The data of the digest
      * @param string $method HTTP method
      * @return string Valid response to compare the digest response with

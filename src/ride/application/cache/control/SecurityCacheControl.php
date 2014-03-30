@@ -20,20 +20,20 @@ class SecurityCacheControl extends AbstractCacheControl {
 
     /**
      * Instance of the security model
-     * @var ride\library\security\model\SecurityModel
+     * @var \ride\library\security\model\SecurityModel
      */
     private $securityModel;
 
     /**
      * Instance of the configuration
-     * @var ride\library\config\Config
+     * @var \ride\library\config\Config
      */
     private $config;
 
     /**
      * Constructs a new security cache control
-     * @param ride\library\security\model\SecurityModel $securityModel
-     * @param ride\library\config\Config $config
+     * @param \ride\library\security\model\SecurityModel $securityModel
+     * @param \ride\library\config\Config $config
      * @return null
      */
     public function __construct(SecurityModel $securityModel, Config $config) {
