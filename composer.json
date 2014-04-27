@@ -14,7 +14,7 @@
         "ride/lib-event": ">=0.3.2",
         "ride/lib-http": ">=0.2.1",
         "ride/lib-security": ">=0.1.5",
-        "ride/lib-system": ">=0.1.2",
+        "ride/lib-system": ">=0.2.0",
         "ride/web": ">=0.2.4"
     },
     "autoload": {
