@@ -2,7 +2,7 @@
     "name": "ride/web-security",
     "description": "Security integration for a Ride web application.",
     "license": "MIT",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "authors": [
         {
             "name": "Joris Vandeweerd",
