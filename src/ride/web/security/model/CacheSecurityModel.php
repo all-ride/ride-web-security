@@ -10,7 +10,7 @@ use ride\library\system\file\File;
 /**
  * Implementation to cache an optimize an existing security model
  */
-class CachedSecurityModel implements SecurityModel {
+class CacheSecurityModel implements SecurityModel {
 
     /**
      * The cached ping result
@@ -128,11 +128,42 @@ class CachedSecurityModel implements SecurityModel {
     }
 
     /**
-     * Creates a new user
-     * @return User
+     * Sets the granted permissions to a role
+     * @param Role $role Role to set the permissions to
+     * @param array $permissionCodes Array with a permission code per element
+     * @return null
      */
-    public function createUser() {
-        return $this->model->createUser();
+    public function setGrantedPermissionsToRole(Role $role, array $permissionCodes) {
+        $this->model->setGrantedPermissionsToRole($role, $permissionCodes);
+    }
+
+    /**
+     * Sets the allowed paths to a role
+     * @param Role $role Role to set the routes to
+     * @param array $paths Array with a path regular expression per element
+     * @return null
+     */
+    public function setAllowedPathsToRole(Role $role, array $paths) {
+        $this->model->setAllowedPathsToRole($role, $paths);
+    }
+
+    /**
+     * Saves the provided roles for the provided user
+     * @param User $user The user to update
+     * @param array $roles The roles to set to the user
+     * @return null
+     */
+    public function setRolesToUser(User $user, array $roles) {
+        $this->model->setRolesToUser($user, $roles);
+    }
+
+    /**
+     * Gets a user by it's id
+     * @param string $id Id of the user
+     * @return User|null User object if found, null otherwise
+     */
+    public function getUserById($id) {
+        return $this->model->getUserById($id);
     }
 
     /**
@@ -154,21 +185,43 @@ class CachedSecurityModel implements SecurityModel {
     }
 
     /**
-     * Find the users which match the provided part of a username
-     * @param string $query Part of a username to match
-     * @return array Array with the usernames which match the provided query
+     * Gets the users
+     * @param array $options Options for the query
+     * <ul>
+     *     <li>query</li>
+     *     <li>name</li>
+     *     <li>username</li>
+     *     <li>email</li>
+     *     <li>page</li>
+     *     <li>limit</li>
+     * </ul>
+     * @return array
      */
-    public function findUsersByUsername($query) {
-        return $this->model->findUsersByUsername($query);
+    public function getUsers(array $options = null) {
+        return $this->model->getUsers($options);
     }
 
     /**
-     * Find the users which match the provided part of a email address
-     * @param string $query Part of a email address
-     * @return array Array with the usernames of the users which match the provided query
+     * Counts the users
+     * @param array $options Extra options for the query
+     * <ul>
+     *     <li>query</li>
+     *     <li>name</li>
+     *     <li>username</li>
+     *     <li>email</li>
+     * </ul>
+     * @return integer
      */
-    public function findUsersByEmail($query) {
-        return $this->model->findUsersByEmail($query);
+    public function countUsers(array $options = null) {
+        return $this->model->countUsers($options);
+    }
+
+    /**
+     * Creates a new user
+     * @return User
+     */
+    public function createUser() {
+        return $this->model->createUser();
     }
 
     /**
@@ -181,16 +234,6 @@ class CachedSecurityModel implements SecurityModel {
     }
 
     /**
-     * Saves the provided roles for the provided user
-     * @param User $user The user to update
-     * @param array $roles The roles to set to the user
-     * @return null
-     */
-    public function setRolesToUser(User $user, array $roles) {
-        $this->model->setRolesToUser($user, $roles);
-    }
-
-    /**
      * Deletes the provided user
      * @param User $user The user to delete
      * @return null
@@ -200,11 +243,12 @@ class CachedSecurityModel implements SecurityModel {
     }
 
     /**
-     * Creates a new role
-     * @return \ride\library\security\model\Role
+     * Gets a role by it's id
+     * @param string $id Id of the role
+     * @return Role|null Role object if found, null otherwise
      */
-    public function createRole() {
-        return $this->model->createRole();
+    public function getRoleById($id) {
+        return $this->model->getRoleById($id);
     }
 
     /**
@@ -218,19 +262,38 @@ class CachedSecurityModel implements SecurityModel {
 
     /**
      * Gets all the roles
+     * @param array $options Options for the query
+     * <ul>
+     *     <li>query</li>
+     *     <li>name</li>
+     *     <li>page</li>
+     *     <li>limit</li>
+     * </ul>
      * @return array
      */
-    public function getRoles() {
-        return $this->model->getRoles();
+    public function getRoles(array $options = null) {
+        return $this->model->getRoles($options);
     }
 
     /**
-     * Finds roles by it's name
-     * @param string $query Part of the name
-     * @return array Array with Role objects
+     * Counts the roles
+     * @param array $options Extra options for the query
+     * <ul>
+     *     <li>query</li>
+     *     <li>name</li>
+     * </ul>
+     * @return integer
      */
-    public function findRolesByName($query) {
-        return $this->model->findRolesByName($query);
+    public function countRoles(array $options = null) {
+        return $this->model->countRoles($options);
+    }
+
+    /**
+     * Creates a new role
+     * @return \ride\library\security\model\Role
+     */
+    public function createRole() {
+        return $this->model->createRole();
     }
 
     /**
@@ -240,26 +303,6 @@ class CachedSecurityModel implements SecurityModel {
      */
     public function saveRole(Role $role) {
         $this->model->saveRole($role);
-    }
-
-    /**
-     * Sets the granted permissions to a role
-     * @param Role $role Role to set the permissions to
-     * @param array $permissionCodes Array with a permission code per element
-     * @return null
-     */
-    public function setGrantedPermissionsToRole(Role $role, array $permissionCodes) {
-        $this->model->setGrantedPermissionsToRole($role, $permissionCodes);
-    }
-
-    /**
-     * Sets the allowed paths to a role
-     * @param Role $role Role to set the routes to
-     * @param array $paths Array with a path regular expression per element
-     * @return null
-     */
-    public function setAllowedPathsToRole(Role $role, array $paths) {
-        $this->model->setAllowedPathsToRole($role, $paths);
     }
 
     /**
@@ -303,8 +346,8 @@ class CachedSecurityModel implements SecurityModel {
      * @param string $code Code of the permission
      * @return null
      */
-    public function registerPermission($code) {
-        $this->model->registerPermission($code);
+    public function addPermission($code) {
+        $this->model->addPermission($code);
 
         $this->permissions = null;
 
@@ -316,8 +359,8 @@ class CachedSecurityModel implements SecurityModel {
      * @param string $code Code of the permission
      * @return null
      */
-    public function unregisterPermission($code) {
-        $this->model->unregisterPermission($code);
+    public function deletePermission($code) {
+        $this->model->deletePermission($code);
 
         if (isset($this->permissions[$code])) {
             unset($this->permissions[$code]);
@@ -397,7 +440,7 @@ class CachedSecurityModel implements SecurityModel {
     protected function generatePhp() {
         $output = "<?php\n\n";
         $output .= "/*\n";
-        $output .= " * This file is generated by ride\web\security\model\CachedSecurityModel.\n";
+        $output .= " * This file is generated by ride\web\security\model\CacheSecurityModel.\n";
         $output .= " */\n";
         $output .= "\n";
         $output .= '$ping = ' . var_export($this->ping, true) . ";\n";

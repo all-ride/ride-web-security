@@ -100,7 +100,7 @@
         },
         {
             "interfaces": "ride\\library\\security\\authenticator\\Authenticator",
-            "class": "ride\\library\\security\\authenticator\\ChainedAuthenticator",
+            "class": "ride\\library\\security\\authenticator\\ChainAuthenticator",
             "id": "chain",
             "calls": [
                 {
@@ -138,12 +138,12 @@
         },
         {
             "interfaces": "ride\\library\\security\\model\\SecurityModel",
-            "class": "ride\\library\\security\\model\\ChainedSecurityModel",
+            "class": "ride\\library\\security\\model\\ChainSecurityModel",
             "id": "chain"
         },
         {
             "interfaces": "ride\\library\\security\\model\\SecurityModel",
-            "class": "ride\\web\\security\\model\\CachedSecurityModel",
+            "class": "ride\\web\\security\\model\\CacheSecurityModel",
             "id": "cache",
             "calls": [
                 {
