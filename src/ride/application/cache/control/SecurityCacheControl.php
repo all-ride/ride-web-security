@@ -5,7 +5,7 @@ namespace ride\application\cache\control;
 use ride\library\config\Config;
 use ride\library\security\model\SecurityModel;
 
-use ride\web\security\model\CachedSecurityModel;
+use ride\web\security\model\CacheSecurityModel;
 
 /**
  * Cache control implementation for the security model
@@ -54,7 +54,7 @@ class SecurityCacheControl extends AbstractCacheControl {
      * @return null
      */
     public function enable() {
-        $model = $this->config->get('system.security.model.default');
+        $model = $this->config->get('system.security.model.default', 'chain');
         if ($model == 'cache') {
             return;
         }
@@ -68,7 +68,7 @@ class SecurityCacheControl extends AbstractCacheControl {
      * @return null
      */
     public function disable() {
-        $model = $this->config->get('system.security.model.default');
+        $model = $this->config->get('system.security.model.default', 'chain');
         if ($model != 'cache') {
             return;
         }
@@ -84,7 +84,7 @@ class SecurityCacheControl extends AbstractCacheControl {
      * @return boolean
      */
     public function isEnabled() {
-        return $this->securityModel instanceof CachedSecurityModel;
+        return $this->securityModel instanceof CacheSecurityModel;
     }
 
     /**
