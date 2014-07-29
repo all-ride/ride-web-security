@@ -445,7 +445,13 @@ class CacheSecurityModel implements SecurityModel {
         $output .= "\n";
         $output .= '$ping = ' . var_export($this->ping, true) . ";\n";
         $output .= '$securedPaths = ' . var_export($this->securedPaths, true) . ";\n";
-        $output .= '$permissions = ' . var_export($this->permissions, true) . ";\n";
+
+        if ($this->permissions) {
+            $output .= '$permissions = null;' . "\n";
+        } else {
+            $output .= '$permissions = array();' . "\n";
+        }
+
         $output .= "\n";
 
         return $output;
