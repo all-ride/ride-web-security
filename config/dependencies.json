@@ -45,6 +45,11 @@
             ]
         },
         {
+            "interfaces": "ride\\library\\encryption\\cipher\\Cipher",
+            "class": "ride\\library\\encryption\\cipher\\GenericCipher",
+            "id": "security"
+        },
+        {
             "interfaces": "ride\\library\\security\\authenticator\\io\\AuthenticatorIO",
             "class": "ride\\web\\security\\authenticator\\io\\SessionAuthenticatorIO",
             "id": "security",
