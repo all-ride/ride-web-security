@@ -124,6 +124,43 @@
             ]
         },
         {
+            "interfaces": "ride\\library\\security\\voter\\Voter",
+            "class": "ride\\library\\security\\voter\\PermissionVoter",
+            "id": "permission"
+        },
+        {
+            "interfaces": "ride\\library\\security\\voter\\Voter",
+            "class": "ride\\library\\security\\voter\\ChainVoter",
+            "id": "chain",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "strategy",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "security.voter.strategy"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "addVoter",
+                    "arguments": [
+                        {
+                            "name": "voter",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "ride\\library\\security\\voter\\Voter",
+                                "id": "permission"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "class": "ride\\library\\system\\file\\File",
             "id": "cache.security",
             "calls": [
@@ -201,6 +238,19 @@
                             "properties": {
                                 "interface": "ride\\library\\encryption\\hash\\Hash",
                                 "id": "security"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "setVoter",
+                    "arguments": [
+                        {
+                            "name": "voter",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "ride\\library\\security\\voter\\Voter",
+                                "id": "chain"
                             }
                         }
                     ]
