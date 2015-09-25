@@ -1,3 +1,4 @@
 {
+    "security.voter.strategy": "affirmative",
     "system.cache.security": "%application%/data/cache/%environment%/security.php"
 }

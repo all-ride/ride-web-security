@@ -1,5 +1,6 @@
 security.hash                       Name of the password hash algorithm, eg. sha1, md5, ...
 security.unique                     Flag to force unique sessions which forbids a user to login with multiple clients.
+security.voter.strategy             Set the strategy of the voter chain: affirmative, consensus or unanimous
 system.security.model.default       Dependency id of the default security model
 system.security.model.cache         Dependency id of the cached security model
 system.cache.security               Path to the PHP file of the security layer's cache implementation.
