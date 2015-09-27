@@ -88,17 +88,22 @@ class SecurityCacheControl extends AbstractCacheControl {
     }
 
     /**
+     * Warms this cache
+     * @return null
+     */
+    public function warm() {
+        if ($this->isEnabled()) {
+            $this->securityModel->warmCache();
+        }
+    }
+
+    /**
      * Clears this cache
      * @return null
      */
     public function clear() {
-        if (!$this->isEnabled()) {
-            return;
-        }
-
-        $file = $this->securityModel->getFile();
-        if ($file->exists()) {
-            $file->delete();
+        if ($this->isEnabled()) {
+            $this->securityModel->clearCache();
         }
     }
 
