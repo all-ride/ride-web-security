@@ -55,6 +55,16 @@ class CacheSecurityModel implements SecurityModel {
     }
 
     /**
+     * Destructs the cached security model
+     * @return null
+     */
+    public function __destruct() {
+        if (isset($this->needWrite)) {
+            $this->warmCache();
+        }
+    }
+
+    /**
      * Gets a string representation of this model
      * @return string
      */
@@ -78,7 +88,7 @@ class CacheSecurityModel implements SecurityModel {
     }
 
     /**
-	 * Gets the file for the generated code
+     * Gets the file for the generated code
      * @return \ride\library\system\file\File The file to generate the code in
      * @return null
      */
@@ -370,22 +380,11 @@ class CacheSecurityModel implements SecurityModel {
     }
 
     /**
-     * Deletes the generated cache file
-     * @return null
-     */
-    protected function clearCache() {
-        if ($this->file->exists()) {
-            $this->file->delete();
-        }
-    }
-
-    /**
      * Reads the generated cache file into memory
      * @return null
      */
     protected function readCache() {
         if (!$this->file->exists()) {
-            $this->writeCache();
             return;
         }
 
@@ -405,10 +404,10 @@ class CacheSecurityModel implements SecurityModel {
     }
 
     /**
-     * Writes the current security model to the cache
-     * @return null
+     * Warms up the cache
+     * @return null 
      */
-    protected function writeCache() {
+    public function warmCache() {
         if (!$this->ping()) {
             // don't cache a model which is not ready
             return;
@@ -422,15 +421,27 @@ class CacheSecurityModel implements SecurityModel {
             $this->permissions = $this->getPermissions();
         }
 
-    	// generate the PHP code for this model
-    	$php = $this->generatePhp();
+        // generate the PHP code for this model
+        $php = $this->generatePhp();
 
-    	// make sure the parent directory of the script exists
-    	$parent = $this->file->getParent();
-    	$parent->create();
+        // make sure the parent directory of the script exists
+        $parent = $this->file->getParent();
+        $parent->create();
 
-    	// write the PHP code to file
-    	$this->file->write($php);
+        // write the PHP code to file
+        $this->file->write($php);
+    }
+
+    /**
+     * Deletes the generated cache file
+     * @return null
+     */
+    public function clearCache() {
+        if ($this->file->exists()) {
+            $this->file->delete();
+        }
+
+        $this->needsWrite = true;
     }
 
     /**
