@@ -126,7 +126,8 @@
         {
             "interfaces": "ride\\library\\security\\voter\\Voter",
             "class": "ride\\library\\security\\voter\\ModelVoter",
-            "id": "model"
+            "id": "model",
+            "tags": "chain"
         },
         {
             "interfaces": "ride\\library\\security\\voter\\Voter",
@@ -146,14 +147,14 @@
                     ]
                 },
                 {
-                    "method": "addVoter",
+                    "method": "addVoters",
                     "arguments": [
                         {
-                            "name": "voter",
-                            "type": "dependency",
+                            "name": "voters",
+                            "type": "dependencies",
                             "properties": {
                                 "interface": "ride\\library\\security\\voter\\Voter",
-                                "id": "model"
+                                "include": "chain"
                             }
                         }
                     ]
