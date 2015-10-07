@@ -33,7 +33,7 @@ class ApplicationListener {
 
         $path = $request->getBasePath(true);
 
-        if ($securityManager->isPathAllowed($path)) {
+        if ($securityManager->isPathAllowed($path, $request->getMethod())) {
             return;
         }
 

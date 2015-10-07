@@ -23,7 +23,7 @@ class SecurityManager extends LibSecurityManager {
             list($path, $query) = explode('?', $path, 2);
         }
 
-        return $this->isPathAllowed($path);
+        return $this->isPathAllowed($path, $this->request->getMethod());
     }
 
 }
