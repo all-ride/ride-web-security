@@ -213,7 +213,7 @@
             ]
         },
         {
-            "interfaces": "ride\\library\\security\\SecurityManager",
+            "interfaces": ["ride\\library\\security\\SecurityManager", "ride\\web\\security\\SecurityManager"],
             "class": "ride\\web\\security\\SecurityManager",
             "id": "security",
             "calls": [
