@@ -5,7 +5,8 @@ namespace ride\web\security;
 use ride\library\event\Event;
 use ride\library\http\Header;
 use ride\library\http\Response;
-use ride\library\security\authenticator\ChainedAuthenticator;
+use ride\library\mvc\Request;
+use ride\library\security\authenticator\ChainAuthenticator;
 use ride\library\security\exception\UnauthorizedException;
 use ride\library\security\SecurityManager;
 
@@ -31,9 +32,24 @@ class ApplicationListener {
             return;
         }
 
-        $path = $request->getBasePath(true);
+        $isAllowed = true;
 
-        if ($securityManager->isPathAllowed($path, $request->getMethod())) {
+        if ($request instanceof Request) {
+            $route = $request->getRoute();
+            if ($route->getPermissions()) {
+                $isAllowed = false;
+
+                $permissions = $route->getPermissions();
+                foreach ($permissions as $permission) {
+                    if ($securityManager->isPermissionGranted($permission)) {
+                        return;
+                    }
+                }
+            }
+        }
+
+        $path = $request->getBasePath(true);
+        if ($isAllowed && $securityManager->isPathAllowed($path, $request->getMethod())) {
             return;
         }
 
@@ -77,7 +93,7 @@ class ApplicationListener {
             return $authenticator;
         }
 
-        if ($authenticator instanceof ChainedAuthenticator) {
+        if ($authenticator instanceof ChainAuthenticator) {
             $authenticators = $authenticator->getAuthenticators();
             foreach ($authenticators as $authenticator) {
                 if ($authenticator instanceof HttpAuthenticator) {
