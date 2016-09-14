@@ -11,10 +11,11 @@
     ],
     "require": {
         "ride/app": ">=0.5.0",
-        "ride/lib-event": ">=0.3.2",
-        "ride/lib-http": ">=0.2.1",
+        "ride/lib-event": "^1.0.0",
+        "ride/lib-http": "^1.0.0",
         "ride/lib-security": ">=0.8.0",
-        "ride/lib-system": ">=0.2.0",
+        "ride/lib-router": "^1.3.0",
+        "ride/lib-system": "^1.0.0",
         "ride/web": ">=0.2.4"
     },
     "autoload": {
@@ -22,5 +23,5 @@
             "ride\\application\\cache\\control\\": ["src/"],
             "ride\\web\\security\\": ["src/"]
         }
-    }    
+    }
 }
