@@ -6,7 +6,7 @@ use ride\library\event\Event;
 use ride\library\http\Header;
 use ride\library\http\Response;
 use ride\library\mvc\Request;
-use ride\library\security\authenticator\ChainedAuthenticator;
+use ride\library\security\authenticator\ChainAuthenticator;
 use ride\library\security\exception\UnauthorizedException;
 use ride\library\security\SecurityManager;
 
@@ -93,7 +93,7 @@ class ApplicationListener {
             return $authenticator;
         }
 
-        if ($authenticator instanceof ChainedAuthenticator) {
+        if ($authenticator instanceof ChainAuthenticator) {
             $authenticators = $authenticator->getAuthenticators();
             foreach ($authenticators as $authenticator) {
                 if ($authenticator instanceof HttpAuthenticator) {

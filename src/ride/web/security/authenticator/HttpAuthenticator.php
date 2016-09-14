@@ -1,6 +1,6 @@
 <?php
 
-namespace ride\security\authenticator;
+namespace ride\web\security\authenticator;
 
 use ride\library\event\EventManager;
 use ride\library\event\Event;
@@ -114,7 +114,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
         $username = $user->getUserName();
         $a1 = md5($username . ':' . $this->realm . ':' . $password);
 
-        $user->setUserPreference(self::PREFERENCE_A1, $a1);
+        $user->setPreference(self::PREFERENCE_A1, $a1);
     }
 
     /**
@@ -189,7 +189,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
             $validResponse = $this->generateValidResponse($user, $digest, $request->getMethod());
 
             if ($digest['response'] == $validResponse) {
-                if (!$user || ($user && !$user->isUserActive())) {
+                if (!$user || ($user && !$user->isActive())) {
                     $this->user = null;
                 } else {
                     $this->user = $this->setUser($user);
@@ -211,7 +211,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
      * @return \ride\library\security\model\User updated user with the
      * information of the authentification
      */
-    public function setUser(User $user) {
+    public function setUser(User $user = null) {
         return $this->user = $user;
     }
 
@@ -223,7 +223,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
      * @return string Valid response to compare the digest response with
      */
     private function generateValidResponse(User $user, array $digest, $method) {
-        $a1 = $user->getUserPreference(self::PREFERENCE_A1);
+        $a1 = $user->getPreference(self::PREFERENCE_A1);
         if (!$a1) {
             return null;
         }
