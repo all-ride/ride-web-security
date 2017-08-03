@@ -70,6 +70,12 @@ class HttpAuthenticator extends AbstractAuthenticator {
     private $type;
 
     /**
+     * Path prefixes to enable this authenticator for
+     * @var array
+     */
+    private $enabledPaths;
+
+    /**
      * Constructs a new authenticator
      * @param \ride\library\security\authenticator\io\AuthenticatorIO $io
      * @param string $realm The realm for the authentication
@@ -80,6 +86,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
         $this->user = false;
         $this->realm = $realm;
         $this->type = self::TYPE_DIGEST;
+        $this->enabledPaths = array('/');
 
         $this->initNonce();
 
@@ -100,6 +107,32 @@ class HttpAuthenticator extends AbstractAuthenticator {
         }
 
         $this->type = $type;
+    }
+
+    /**
+     * Sets the paths on which this authenticator should act
+     * @param array $paths Array with path prefixes
+     * @return null
+     */
+    public function setEnabledPaths(array $enabledPaths) {
+        $this->enabledPaths = $enabledPaths;
+    }
+
+    /**
+     * Checks if this HTTP authenticator is enabled for the provided request
+     * @param \ride\library\http\Request $request Incoming request
+     * @return boolean
+     */
+    public function isEnabled(Request $request) {
+        $requestPath = $request->getPath();
+
+        foreach ($this->enabledPaths as $enabledPath) {
+            if (strpos($requestPath, $enabledPath) === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -147,6 +180,10 @@ class HttpAuthenticator extends AbstractAuthenticator {
      * succeeded
      */
     public function authenticate(Request $request) {
+        if (!$this->isEnabled($request)) {
+            return null;
+        }
+
         if (isset($_SERVER['PHP_AUTH_DIGEST'])) {
             return $this->authenticateDigest($request);
         } else {
