@@ -69,13 +69,14 @@ class ApplicationListener {
         }
 
         $web = $event->getArgument('web');
+        $request = $web->getRequest();
         $response = $web->getResponse();
 
         $user = $securityManager->getUser();
         $authenticator = $securityManager->getAuthenticator();
         $httpAuthenticator = $this->getHttpAuthenticator($authenticator);
 
-        if (!$user && $httpAuthenticator) {
+        if (!$user && $httpAuthenticator && $httpAuthenticator->isEnabled($request)) {
             $response->addHeader(Header::HEADER_AUTHENTICATE, $httpAuthenticator->getAuthenticateHeaderValue());
             $response->setStatusCode(Response::STATUS_CODE_UNAUTHORIZED);
         } else {
