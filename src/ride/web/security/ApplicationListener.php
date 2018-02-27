@@ -36,7 +36,7 @@ class ApplicationListener {
 
         if ($request instanceof Request) {
             $route = $request->getRoute();
-            if ($route->getPermissions()) {
+            if ($route && $route->getPermissions()) {
                 $isAllowed = false;
 
                 $permissions = $route->getPermissions();
