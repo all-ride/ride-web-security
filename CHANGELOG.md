@@ -1,3 +1,7 @@
+## [1.1.2] - 2018-04-20
+### Updated
+- catch exception when retrieving user when handling exceptions
+
 # [1.1.1] - 2018-02-27
 ## Updated 
 - ignore permission protection for requests without a route

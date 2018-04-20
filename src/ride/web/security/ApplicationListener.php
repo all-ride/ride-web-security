@@ -12,6 +12,8 @@ use ride\library\security\SecurityManager;
 
 use ride\web\security\authenticator\HttpAuthenticator;
 
+use \Exception;
+
 /**
  * Application listener to integrate security
  */
@@ -72,7 +74,12 @@ class ApplicationListener {
         $request = $web->getRequest();
         $response = $web->getResponse();
 
-        $user = $securityManager->getUser();
+        try {
+            $user = $securityManager->getUser();
+        } catch (Exception $exception) {
+            $user = null;
+        }
+
         $authenticator = $securityManager->getAuthenticator();
         $httpAuthenticator = $this->getHttpAuthenticator($authenticator);
 
