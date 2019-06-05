@@ -1,3 +1,7 @@
+## [1.1.3] - 2019-06-05
+### Updated
+- Initialize nonce of HTTP authenticator only when needed to omit creating unnecessairy sessions
+
 ## [1.1.2] - 2018-04-20
 ### Updated
 - catch exception when retrieving user when handling exceptions
