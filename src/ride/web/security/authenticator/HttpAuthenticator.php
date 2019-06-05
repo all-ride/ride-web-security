@@ -88,8 +88,6 @@ class HttpAuthenticator extends AbstractAuthenticator {
         $this->type = self::TYPE_DIGEST;
         $this->enabledPaths = array('/');
 
-        $this->initNonce();
-
         if ($eventManager) {
             $eventManager->addEventListener(SecurityManager::EVENT_PASSWORD_UPDATE, array($this, 'updateDigest'));
         }
@@ -157,7 +155,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
     public function logout() {
         $this->user = false;
 
-        $this->refreshNonce();
+        $this->clearNonce();
     }
 
     /**
@@ -218,6 +216,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
         if (!$digest) {
             return null;
         }
+
+        $this->initNonce();
 
         $securityModel = $this->securityManager->getSecurityModel();
 
@@ -306,6 +306,8 @@ class HttpAuthenticator extends AbstractAuthenticator {
      * @return string
      */
     public function getAuthenticateHeaderValue() {
+        $this->initNonce();
+
         if ($this->type == self::TYPE_DIGEST) {
             $header = 'Digest realm="' . $this->realm . '"';
             $header .= ',qop="auth"';
@@ -324,18 +326,30 @@ class HttpAuthenticator extends AbstractAuthenticator {
      */
     private function initNonce() {
         $this->nonce = $this->io->get(self::VAR_NONCE);
+
         if (!$this->nonce) {
             $this->refreshNonce();
         }
     }
 
     /**
-     * Creates a new nounce
+     * Creates a new nonce
      * @return null
      */
     private function refreshNonce() {
         $this->nonce = uniqid();
         $this->io->set(self::VAR_NONCE, $this->nonce);
+    }
+
+    /**
+     * Clears the current nonce
+     */
+    private function clearNonce() {
+        $this->nonce = null;
+
+        if ($this->io->get(self::VAR_NONCE)) {
+            $this->io->set(self::VAR_NONCE, null);
+        }
     }
 
 }
