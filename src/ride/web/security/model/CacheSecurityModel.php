@@ -12,6 +12,8 @@ use ride\library\system\file\File;
  */
 class CacheSecurityModel implements SecurityModel {
 
+    private $model;
+
     /**
      * The cached ping result
      * @var boolean|null
@@ -35,6 +37,13 @@ class CacheSecurityModel implements SecurityModel {
      * @var array|null
      */
     private $roles;
+
+    private $file;
+
+    /**
+     * @var true
+     */
+    private $needsWrite;
 
     /**
      * Constructs a new cached security model
