@@ -74,6 +74,7 @@ class HttpAuthenticator extends AbstractAuthenticator {
      * @var array
      */
     private $enabledPaths;
+    private $io;
 
     /**
      * Constructs a new authenticator
